@@ -1,31 +1,38 @@
-include(FetchContent)
+cmake_minimum_required(VERSION 3.16)
+project(OpenGL)
 
-# ---- GLFW ----
-FetchContent_Declare(
-        glfw
-        GIT_REPOSITORY https://github.com/glfw/glfw.git
-        GIT_TAG latest
+set(CMAKE_CXX_STANDARD 17)
+
+# ------------------------
+# GLFW (has its own CMakeLists.txt)
+# ------------------------
+add_subdirectory(external/glfw)
+
+# ------------------------
+# GLAD (manual library, no CMakeLists.txt inside external/glad)
+# ------------------------
+add_library(glad
+        external/glad/src/glad.c
+        Shader/Shader.h
 )
-FetchContent_MakeAvailable(glfw)
 
-# ---- GLAD ----
-FetchContent_Declare(
-        glad
-        GIT_REPOSITORY https://github.com/Dav1dde/glad.git
+target_include_directories(glad PUBLIC
+        external/glad/include
 )
-FetchContent_MakeAvailable(glad)
 
-add_executable(OpenGLProject
+# ------------------------
+# Your executable
+# ------------------------
+add_executable(OpenGL
         main.cpp
-        src/glad.c
 )
 
-target_include_directories(OpenGLProject PRIVATE
-        include
-)
-
-target_link_libraries(OpenGLProject PRIVATE
+target_link_libraries(OpenGL
         glfw
         glad
-        ${CMAKE_DL_LIBS}
 )
+
+# Linux only: extra libs
+if (UNIX AND NOT APPLE)
+    target_link_libraries(OpenGL dl pthread)
+endif()
