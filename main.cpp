@@ -31,7 +31,7 @@ int main() {
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
-    GLFWwindow* window = glfwCreateWindow(800, 600, "Test", nullptr, nullptr);
+    GLFWwindow* window = glfwCreateWindow(600, 600, "Test", nullptr, nullptr);
     if (!window) return -1;
 
     glfwMakeContextCurrent(window);
@@ -59,11 +59,11 @@ int main() {
     unsigned int VAO;
     glGenVertexArrays(1, &VAO);
 
-    unsigned int VBO;
-    glGenBuffers(1, &VBO);
+    // unsigned int VBO;
+    // glGenBuffers(1, &VBO);
 
-    unsigned int EBO;
-    glGenBuffers(1, &EBO);
+    // unsigned int EBO;
+    // glGenBuffers(1, &EBO);
 
     glBindVertexArray(VAO);
 
@@ -85,7 +85,7 @@ int main() {
     glBindVertexArray(0);
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    Shader ourShader("../Shader/vShader.vert", "../Shader/oneDimension.frag");
+    Shader ourShader("../Shader/vShader.vert", "../Shader/color.frag");
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
