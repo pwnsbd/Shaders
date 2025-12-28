@@ -85,7 +85,7 @@ int main() {
     glBindVertexArray(0);
 
     // glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    Shader ourShader("../Shader/vShader.vert", "../Shader/color.frag");
+    Shader ourShader("../Shader/vShader.vert", "../Shader/pattern.frag");
 
     while (!glfwWindowShouldClose(window)) {
         processInput(window);
